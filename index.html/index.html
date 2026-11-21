@@ -1,0 +1,680 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0b0b">
+  <meta name="description" content="NOIR BARBER – ukázkový koncept moderního barbershopu.">
+  <title>NOIR BARBER — Modern Barbershop</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #0b0b0b;
+      --panel: #171717;
+      --white: #f4f4f1;
+      --gray: #aaa;
+      --line: #383838;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--white);
+      font-family: "DM Sans", Arial, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { display: block; width: 100%; }
+
+    button { font: inherit; }
+
+    h1, h2, h3, .logo {
+      font-family: "Oswald", Impact, sans-serif;
+      text-transform: uppercase;
+    }
+
+    .container {
+      width: min(1200px, 88%);
+      margin: auto;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .muted { color: var(--gray); }
+
+    .header {
+      position: relative;
+      z-index: 10;
+      background: var(--black);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: opacity .2s;
+    }
+
+    .nav-links a:hover { opacity: .55; }
+
+    .nav-cta {
+      padding: 13px 20px;
+      background: var(--white);
+      color: var(--black);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: white;
+      padding: 10px 13px;
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 700px;
+      min-height: min(850px, 90svh);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: #191919;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg,
+          rgba(0,0,0,.9) 0%,
+          rgba(0,0,0,.65) 48%,
+          rgba(0,0,0,.18) 100%),
+        url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1800&q=85")
+        center / cover;
+      filter: grayscale(100%);
+      transform: scale(1.02);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 100px 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(72px, 12vw, 170px);
+      line-height: .92;
+      letter-spacing: -3px;
+      margin: 26px 0;
+      max-width: 1000px;
+    }
+
+    .hero p {
+      max-width: 450px;
+      color: #ddd;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 16px 26px;
+      border: 1px solid var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background .25s, color .25s, transform .25s;
+    }
+
+    .btn:hover { transform: translateY(-3px); }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .btn-white:hover {
+      background: transparent;
+      color: var(--white);
+    }
+
+    .btn-outline:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .hero .btn { margin-top: 28px; }
+
+    .section { padding: 115px 0; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 25px;
+      margin-bottom: 48px;
+    }
+
+    .section h2 {
+      font-size: clamp(48px, 7vw, 90px);
+      line-height: 1;
+      letter-spacing: -1px;
+      margin: 14px 0 0;
+    }
+
+    .section-intro {
+      color: var(--gray);
+      max-width: 350px;
+      line-height: 1.8;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .service {
+      padding: 36px;
+      min-height: 290px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      transition: background .25s, transform .25s;
+    }
+
+    .service:hover {
+      background: #222;
+      transform: translateY(-5px);
+    }
+
+    .service-number {
+      color: #999;
+      font-size: 12px;
+    }
+
+    .service h3 {
+      font-size: 32px;
+      margin: 38px 0 8px;
+    }
+
+    .service p {
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 0 0 25px;
+    }
+
+    .service-price {
+      margin-top: auto;
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    .about {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 75px;
+      align-items: center;
+    }
+
+    .about-image {
+      height: 580px;
+      object-fit: cover;
+      filter: grayscale(100%);
+    }
+
+    .about h2 { margin-bottom: 30px; }
+
+    .about p {
+      color: #555;
+      line-height: 1.9;
+      max-width: 490px;
+    }
+
+    .about .btn {
+      border-color: var(--black);
+      background: var(--black);
+      color: white;
+      margin-top: 20px;
+    }
+
+    .about .btn:hover {
+      background: transparent;
+      color: var(--black);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .gallery img {
+      height: 390px;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: filter .4s, transform .4s;
+    }
+
+    .gallery img:hover {
+      filter: grayscale(0%);
+      transform: scale(1.015);
+    }
+
+    .contact {
+      text-align: center;
+      background: #161616;
+      border-top: 1px solid var(--line);
+    }
+
+    .contact h2 {
+      font-size: clamp(60px, 10vw, 130px);
+    }
+
+    .contact p {
+      color: var(--gray);
+      margin: 25px auto 35px;
+      max-width: 500px;
+      line-height: 1.8;
+    }
+
+    .contact-note {
+      font-size: 12px;
+      color: #999;
+      margin-top: 20px;
+    }
+
+    footer {
+      padding: 35px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    footer p { color: #888; font-size: 12px; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 850px) {
+      .nav { min-height: 72px; }
+
+      .menu-toggle { display: block; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        padding: 30px 6%;
+        background: var(--black);
+        border-bottom: 1px solid var(--line);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-cta { display: none; }
+
+      .hero {
+        min-height: 650px;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(90deg,
+            rgba(0,0,0,.85),
+            rgba(0,0,0,.35)),
+          url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1000&q=80")
+          center / cover;
+        filter: grayscale(100%);
+      }
+
+      .services { grid-template-columns: 1fr; }
+
+      .service { min-height: 240px; }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .about-image { height: 450px; }
+
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+
+      .gallery img { height: 320px; }
+    }
+
+    @media (max-width: 550px) {
+      .container { width: 90%; }
+      .section { padding: 75px 0; }
+      .hero h1 {
+        font-size: clamp(65px, 16vw, 95px);
+        letter-spacing: -1px;
+      }
+      .hero p { font-size: 14px; }
+      .section-head {
+        display: block;
+        margin-bottom: 32px;
+      }
+      .section-intro { margin-top: 22px; }
+      .gallery { grid-template-columns: 1fr; }
+      .gallery img { height: 370px; }
+      .about-image { height: 380px; }
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <nav class="container nav" aria-label="Hlavní navigace">
+      <a href="#" class="logo">NOIR BARBER.</a>
+
+      <button class="menu-toggle"
+        id="menuToggle"
+        aria-label="Otevřít menu"
+        aria-expanded="false"
+        aria-controls="navLinks">
+        ☰
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#sluzby">Služby</a>
+        <a href="#onas">O nás</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+
+      <a href="#kontakt" class="nav-cta">REZERVACE ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-label="Úvod">
+      <div class="container hero-content">
+        <span class="eyebrow">THE ART OF GROOMING / EST. 2026</span>
+        <h1>OWN<br>YOUR<br>STYLE.</h1>
+        <p>
+          Více než jen střih. Precizní práce,
+          ostré detaily a sebevědomí,
+          které začíná v křesle.
+        </p>
+        <a href="#sluzby" class="btn btn-white">
+          PROZKOUMAT SLUŽBY ↗
+        </a>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="sluzby">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">01 / WHAT WE DO</span>
+            <h2>NAŠE SLUŽBY.</h2>
+          </div>
+          <p class="section-intro">
+            Každý detail se počítá.
+            Vyber si službu, která sedí tvému stylu.
+          </p>
+        </div>
+
+        <div class="services">
+          <article class="service reveal">
+            <span class="service-number">01 / HAIRCUT</span>
+            <h3>CLASSIC CUT.</h3>
+            <p>
+              Moderní pánský střih, precizní
+              přechody a profesionální styling.
+            </p>
+            <div class="service-price">450 Kč</div>
+          </article>
+
+          <article class="service reveal">
+            <span class="service-number">02 / BEARD</span>
+            <h3>BEARD TRIM.</h3>
+            <p>
+              Dokonalé kontury, úprava vousů
+              a finální péče.
+            </p>
+            <div class="service-price">300 Kč</div>
+          </article>
+
+          <article class="service reveal">
+            <span class="service-number">03 / COMPLETE</span>
+            <h3>FULL SERVICE.</h3>
+            <p>
+              Kompletní střih vlasů, úprava
+              vousů a prémiový styling.
+            </p>
+            <div class="service-price">650 Kč</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section about" id="onas">
+      <div class="container about-grid">
+        <img
+          class="about-image"
+          src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1100&q=85"
+          alt="Barber při práci"
+          loading="lazy"
+        >
+
+        <div class="reveal">
+          <span class="eyebrow">02 / OUR PHILOSOPHY</span>
+          <h2>NOT JUST<br>A HAIRCUT.</h2>
+          <p>
+            V NOIR BARBER věříme, že dobrý
+            střih není jen o vlasech.
+            Je o sebevědomí, osobním stylu
+            a pozornosti k detailům.
+          </p>
+          <p>
+            Kombinujeme klasické barber techniky
+            s moderními trendy a vytváříme
+            zážitek, který jde dál než
+            běžná návštěva holičství.
+          </p>
+          <a href="#kontakt" class="btn">
+            KONTAKTUJ NÁS ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="section" id="galerie">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">03 / THE LOOKBOOK</span>
+            <h2>THE GALLERY.</h2>
+          </div>
+          <p class="section-intro">
+            Inspirace, atmosféra a styl.
+            Takhle vypadá svět NOIR.
+          </p>
+        </div>
+
+        <div class="gallery">
+          <img
+            src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=85"
+            alt="Interiér barbershopu"
+            loading="lazy"
+          >
+          <img
+            src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=900&q=85"
+            alt="Práce barbera"
+            loading="lazy"
+          >
+          <img
+            src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=85"
+            alt="Barber nástroje a atmosféra"
+            loading="lazy"
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="kontakt">
+      <div class="container reveal">
+        <span class="eyebrow">04 / YOUR NEXT MOVE</span>
+        <h2>STAY SHARP.</h2>
+        <p>
+          Připravený na nový look?
+          Tohle je ukázkový web.
+          Rezervace budou připojeny
+          až pro skutečný barbershop.
+        </p>
+        <a href="mailto:demo@example.com"
+           class="btn btn-white">
+          NAPSAT E-MAIL ↗
+        </a>
+        <div class="contact-note">
+          Demo kontakt – není skutečný rezervační systém.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a href="#" class="logo">NOIR BARBER.</a>
+      <p>© 2026 NOIR BARBER. Portfolio demo.</p>
+      <p>DESIGNED WITH ATTITUDE.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobilní menu
+    const toggle = document.getElementById("menuToggle");
+    const links = document.getElementById("navLinks");
+
+    toggle.addEventListener("click", () => {
+      const isOpen = links.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      toggle.setAttribute(
+        "aria-label",
+        isOpen ? "Zavřít menu" : "Otevřít menu"
+      );
+      toggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    links.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        links.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Otevřít menu");
+        toggle.textContent = "☰";
+      });
+    });
+
+    // Animace při scrollování
+    const elements = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      elements.forEach(el => observer.observe(el));
+    } else {
+      elements.forEach(el => el.classList.add("visible"));
+    }
+  </script>
+</body>
+</html>
